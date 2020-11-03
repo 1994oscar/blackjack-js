@@ -1,0 +1,71 @@
+body{
+    margin: 0;
+    background-color: #2F4F30;
+    font-family: 'Libre Baskerville', serif;
+    color: white;
+}
+
+.title{
+    padding-top: 10px;
+    font-size: 46px;
+    text-align: center;
+}
+
+.hr{
+    background-color:  #2b492c;
+    padding: 3px 0 3px 0;
+}
+
+.newGameButton {
+	box-shadow: 0px 0px 5px 0px #3dc21b;
+	background:linear-gradient(to bottom, #31974c 5%, #5cbf2a 100%);
+	background-color:#3baf5a;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;	
+    font-size:17px;
+    font-weight: 700;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #2f6627;
+}
+.newGameButton:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.newGameButton:active {
+	position:relative;
+	top:1px;
+}
+
+.pauseButton{
+    box-shadow: 0px 0px 5px 0px #797979;
+	background:linear-gradient(to bottom, #b9b9b9 5%, #afafaf 100%);
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #a5a5a5;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;	
+	font-size:17px;
+	padding:10px 28px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #2f6627;
+}
+.score{
+    text-align: center;
+}
+
+.cart{
+    padding-top: 10px;
+    position: relative;
+    max-width: 150px;
+    padding-left: 100px;
+    margin-left: -75px;
+    transition: transform .2s; 
+}
+.cart:hover{
+    transform: scale(1.2);
+}
