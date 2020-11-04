@@ -50,6 +50,29 @@
      * Necesitamos barajar nuestras cartas para poder repartirlas a nuestros jugadores. 
      * 
      */
+
     deck = _.shuffle(deck);
     console.log(deck);
+    return deck;
 }
+
+createDeck();
+
+/**
+ * Función que nos devuelve una carta
+ */
+
+ const giveCard = () => {
+
+    if(deck.length === 0){
+        throw 'No hay cartas en el deck';
+    }
+
+    const card = deck.pop();
+
+    console.log(card);
+    console.log(deck);
+    return card;
+ }
+
+ giveCard();
