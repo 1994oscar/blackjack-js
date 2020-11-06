@@ -15,28 +15,22 @@
     <hr class="hr">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <button class="newGameButton">Nuevo Juego</button>
-            <button class="pauseButton">Pedir Carta</button>
-            <button class="pauseButton">Terminar juego</button>
+            <button id="btnNewGame" class="newGameButton">Nuevo Juego</button>
+            <button id="btnGetCard" class="pauseButton">Pedir Carta</button>
+            <button id="btnFinishGame" class="pauseButton">Terminar juego</button>
         </div>
     </div>
     <hr>
     <div class="row">
-        <div class="col-lg-6">
-            <div class="container">        
-            <h1 class="score"> Jugador 1 - <small>0</small></h1>
-            <div id="player-cart">
-                <!--<img class="cart" src="/assets/cartas/2C.png">
-                <img class="cart" src="/assets/cartas/7D.png">
-                <img class="cart" src="/assets/cartas/3S.png">
-                <img class="cart" src="/assets/cartas/2H.png">-->
-            </div>
-            </div>
+        <div class="col-lg-6">               
+            <h1 class="score"> Jugador - <small id="playerPoints">0</small></h1>
+            <div id="playerCards">               
+            </div>      
         </div>
         <div class="col-lg-6">
             <div class="container"> 
-            <h1 class="score"> Computadora 1 - <small>0</small></h1>
-            <div id="computer-cart">
+            <h1 class="score"> Computadora - <small id="computerPoints">0</small></h1>
+            <div id="computerCards">
                 <!--<img class="cart" src="/assets/cartas/2C.png">
                 <img class="cart" src="/assets/cartas/7D.png">
                 <img class="cart" src="/assets/cartas/3S.png">
@@ -46,6 +40,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="assets/js/underscore.min.js"></script>
     <script src="assets/js/juego.js"></script>
 </body>

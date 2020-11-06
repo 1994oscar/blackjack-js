@@ -58,14 +58,14 @@ body{
     text-align: center;
 }
 
-.cart{
+.cardImage{
     padding-top: 10px;
     position: relative;
-    max-width: 150px;
-    padding-left: 100px;
+    width: 100px;
+    left: 100px;
     margin-left: -75px;
-    transition: transform .2s; 
+	transition: transform .2s; 
 }
-.cart:hover{
+.cardImage:hover{
     transform: scale(1.2);
 }
