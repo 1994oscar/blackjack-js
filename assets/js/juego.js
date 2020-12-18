@@ -1,3 +1,8 @@
+(() => {
+    /** Use strict le dice a JavaScript que sea estricto, en la forma de que el código debe ser
+     * escrito, esto nos ayuda a no cometer errores. 
+     */
+    'use strict'
 /**
  * 
  * Referencias de las cartas. 
@@ -24,21 +29,31 @@
   * 
   */
 
- let deck       = [];
- let types      = ['C','D','S','H'];
- let especials  = ['A','J','Q','K'];
- let playerPoints = 0,
-     computerPoints = 0;
+ let deck             = [];
+ const types          = ['C','D','S','H'],
+       especials      = ['A','J','Q','K'];
+ /*let playerPoints   = 0,
+     computerPoints = 0;*/
+ let playersPoints = [];
 
- const btnNewGame = document.querySelector("#btnNewGame");
- const btnGetCard = document.querySelector("#btnGetCard");
- const btnFinishGame = document.querySelector("#btnFinishGame");
- const playerPointsLabel = document.querySelector('#playerPoints');
- const computerPointsLabel = document.querySelector('#computerPoints');
- const playerCards = document.querySelector('#playerCards');
- const computerCards = document.querySelector('#computerCards');
+ const btnNewGame      = document.querySelector("#btnNewGame"),
+  btnGetCard           = document.querySelector("#btnGetCard"),
+  btnFinishGame        = document.querySelector("#btnFinishGame"),
+  playerPointsLabel    = document.querySelector('#playerPoints'),
+  computerPointsLabel  = document.querySelector('#computerPoints'),
+  playerCards          = document.querySelector('#playerCards'),
+  computerCards        = document.querySelector('#computerCards');
+
+
+  const initDeck = (numPlayers = 1) => {
+    deck = createDeck();
+    for(let i = 0; i< numPlayers; i++){
+        playersPoints = 0;
+    }
+  };
 
  const createDeck = () => {
+     deck = [];
 
     for(let i = 2; i <= 10; i++){
         for(let type of types){
@@ -60,12 +75,9 @@
      * Necesitamos barajar nuestras cartas para poder repartirlas a nuestros jugadores. 
      * 
      */
-
-    deck = _.shuffle(deck);
-    return deck;
+    return _.shuffle(deck);
 }
 
-createDeck();
 
 /**
  * Función que nos devuelve una carta
@@ -77,8 +89,7 @@ createDeck();
         throw 'No hay cartas en el deck';
     }
 
-    const card = deck.pop();
-    return card;
+    return deck.pop();
  }
 
  const getCardValue = (card) => {
@@ -88,13 +99,17 @@ createDeck();
             :cardValue * 1;
  }
 
+ /** 0 = First player, The last item = The machine */
+ const sumPoints = (turn) => {
+
+ }
  /** Turno de la computadora */
 const computerTurn = (minimunPoints) => {
 
    do {
     const newCard = getCard();
-    computerPoints  = computerPoints + getCardValue(newCard);
-    computerPointsLabel.innerText = computerPoints;
+    /*computerPoints  = computerPoints + getCardValue(newCard);
+    computerPointsLabel.innerText = computerPoints;*/
 
     const printCard = document.createElement('img');
     printCard.src = `assets/cartas/${newCard}.png`;
@@ -111,35 +126,81 @@ const computerTurn = (minimunPoints) => {
     if(computerPoints === minimunPoints){
         Swal.fire(
             '¡Nadie gana!',
-            '¿Quieres jugar de nuevo?',
+            '',
             'warning'
             )
     }else if(minimunPoints > 21){
         Swal.fire(
             '¡Perdiste!',
-            'La computadora gana, ¿Quieres jugar de nuevo?',
-            'error'
+            'La computadora gana',
+            'error',       
             )
     }else if(computerPoints > 21){
         Swal.fire(
             '¡Ganaste!',
-            '¿Quieres jugar de nuevo?',
+            '',
             'success'
             )
     }else if(computerPoints > minimunPoints && computerPoints < 21){
         Swal.fire(
             '¡Perdiste!',
-            'La computadora gana, ¿Quieres jugar de nuevo?',
+            'La computadora gana',
             'error'
             )
     }else{
         Swal.fire(
             '¡Perdiste!',
-            'La computadora gana, ¿Quieres jugar de nuevo?',
+            'La computadora gana',
             'error'
             )
     }
+    resetButtons();
    }, 10);
+}
+
+/** Reset Buttons */
+
+const resetButtons = () => {
+    btnGetCard.disabled     = true;
+    btnFinishGame.disabled  = true;
+    btnNewGame.disabled     = false;
+
+    btnGetCard.classList.remove('getCardButton');
+    btnGetCard.classList.add('pauseButton');
+
+    btnFinishGame.classList.remove('finishGameButton');
+    btnFinishGame.classList.add('pauseButton');
+
+    btnNewGame.classList.remove('pauseButton');
+    btnNewGame.classList.add('newGameButton');
+}
+
+/**   Nuevo juego */
+
+const newGame = () => {
+    initDeck();
+    //deck = createDeck();
+    playerPoints    = 0;
+    computerPoints  = 0;
+
+    playerPointsLabel.innerText     = playerPoints;
+    computerPointsLabel.innerText   = computerPoints;
+
+    playerCards.innerHTML   = '';
+    computerCards.innerHTML = '';
+
+    btnGetCard.disabled     = false;
+    btnFinishGame.disabled  = false;
+    btnNewGame.disabled     = true;
+
+    btnGetCard.classList.remove('pauseButton');
+    btnGetCard.classList.add('getCardButton');
+
+    btnFinishGame.classList.remove('pauseButton');
+    btnFinishGame.classList.add('finishGameButton');
+
+    btnNewGame.classList.remove('newGameButton');
+    btnNewGame.classList.add('pauseButton');
 }
 
 /**
@@ -156,13 +217,13 @@ const computerTurn = (minimunPoints) => {
     const printCard     = document.createElement('img');
     printCard.src       = `assets/cartas/${newCard}.png`;
     printCard.classList.add('cardImage');
-
     playerCards.append(printCard);
 
     if(playerPoints > 21){
+
         btnGetCard.disabled = true;       
-        computerTurn(playerPoints);
-        //btnNewGame.classList.remove('newGameButton'); Remover una clase css
+        computerTurn(playerPoints); 
+
     } else if (playerPoints === 21){
         btnGetCard.disabled = true;
         Swal.fire(
@@ -175,12 +236,15 @@ const computerTurn = (minimunPoints) => {
 
  });
 
- btnFinishGame.addEventListener('click', ()=> {
+ btnFinishGame.addEventListener('click', () => {
     btnGetCard.disabled     = true;
     btnFinishGame.disabled  = true;
     computerTurn(playerPoints);
  });
 
  btnNewGame.addEventListener('click', () => {
-
+    newGame();
  });
+
+/**                     END APP                          */
+})()

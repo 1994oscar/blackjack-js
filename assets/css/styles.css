@@ -16,12 +16,8 @@ body{
     padding: 3px 0 3px 0;
 }
 
-.newGameButton {
-	box-shadow: 0px 0px 5px 0px #3dc21b;
-	background:linear-gradient(to bottom, #31974c 5%, #5cbf2a 100%);
-	background-color:#3baf5a;
+.button{
 	border-radius:28px;
-	border:1px solid #18ab29;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;	
@@ -29,29 +25,60 @@ body{
     font-weight: 700;
 	padding:16px 31px;
 	text-decoration:none;
+	border-radius:28px;
+}
+.newGameButton {
+	box-shadow: 0px 0px 0px 0px #3dc21b;
+	background:linear-gradient(to bottom, #31974c 5%, #5cbf2a 100%);
+	background-color:#3baf5a;
+	border:1px solid #18ab29;
 	text-shadow:0px 0px 0px #2f6627;
 }
 .newGameButton:hover {
 	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
 	background-color:#5cbf2a;
 }
+
 .newGameButton:active {
 	position:relative;
 	top:1px;
 }
 
+/*		Get NEW CARD BUTTON */
+.getCardButton {
+	box-shadow: 0px 0px 0px 0px #1bafc2;
+	background:linear-gradient(to bottom, #317297 5%, #2a95bf 100%);
+	background-color:#3b98af;
+	border:1px solid #187dab;
+	text-shadow:0px 0px 0px #2f6627;
+}
+.getCardButton:hover {
+	background:linear-gradient(to bottom, #2a9cbf 5%, #447dc7 100%);
+	background-color:#2a83bf;
+}
+
+/*		Get NEW CARD BUTTON */
+.finishGameButton {
+	box-shadow: 0px 0px 0px 0px #c21b1b;
+	background:linear-gradient(to bottom, #97313f 5%, #bf2a36 100%);
+	background-color:#af3b3b;
+	border:1px solid #ab1818;
+
+	text-shadow:0px 0px 0px #662727;
+}
+.finishButton:hover {
+	background:linear-gradient(to bottom, #bf2a2a 5%, #c74444 100%);
+	background-color:#bf2a2a;
+}
+
+
+
 .pauseButton{
-    box-shadow: 0px 0px 5px 0px #797979;
+    box-shadow: 0px 0px 0px 0px #797979;
 	background:linear-gradient(to bottom, #b9b9b9 5%, #afafaf 100%);
 	background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #a5a5a5;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;	
-	font-size:17px;
+	border:1px solid #a5a5a5;	
 	padding:10px 28px;
-	text-decoration:none;
 	text-shadow:0px 0px 0px #2f6627;
 }
 .score{
