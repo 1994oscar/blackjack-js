@@ -135,42 +135,36 @@
 
     const setWinner = () => {
 
-        const [computerPoints , minimunPoints] = playersPoints;
+        const [minimunPoints , computerPoints] = playersPoints;
 
         setTimeout(()=>{
             if(computerPoints === minimunPoints){
-                Swal.fire(
-                    '¡Nadie gana!',
-                    '',
-                    'warning'
-                    )
-            }else if(minimunPoints > 21){
-                Swal.fire(
-                    '¡Perdiste!',
-                    'La computadora gana',
-                    'error',       
-                    )
-            }else if(computerPoints > 21){
-                Swal.fire(
-                    '¡Ganaste!',
-                    '',
-                    'success'
-                    )
-            }else if(computerPoints > minimunPoints && computerPoints < 21){
-                Swal.fire(
-                    '¡Perdiste!',
-                    'La computadora gana',
-                    'error'
-                    )
-            }else{
-                Swal.fire(
-                    '¡Perdiste!',
-                    'La computadora gana',
-                    'error'
-                    )
-                }
+                gameFinishMessage('¡Nadie gana!',  ' ', 'warning');
+            }else if(minimunPoints > 21 && computerPoints < 21){
+                gameFinishMessage('¡Perdiste!',  'La computadora gana', 'error');
+            }else if(computerPoints > 21 && minimunPoints < 21){
+                gameFinishMessage('¡Ganaste!',  '', 'success');
+            }else if(computerPoints > 21 && minimunPoints > 21){
+                gameFinishMessage('¡Nadie gana!',  ' ', 'warning');
+            }else if(computerPoints < 21 && minimunPoints < 21 && minimunPoints < computerPoints) {
+                gameFinishMessage('¡Perdiste!',  'La computadora gana', 'error');
+            }else if(computerPoints < 21 && minimunPoints < 21 && minimunPoints > computerPoints) {
+                gameFinishMessage('¡Ganaste!',  '', 'success');
+            }else if((computerPoints === 21 && minimunPoints < 21) || (computerPoints === 21 && minimunPoints > 21)) {
+                gameFinishMessage('¡Perdiste!',  'La computadora gana con 21', 'error');
+            }else if((computerPoints < 21 && minimunPoints === 21) || (computerPoints > 21 && minimunPoints === 21)) {
+                gameFinishMessage('¡Ganaste!',  '21', 'success');
+            }
                     resetButtons();
         }, 10);
+    }
+
+    const gameFinishMessage = (title, message, type) => {
+        Swal.fire(
+            title,
+            message,
+            type
+        )
     }
 
     /** Turno de la computadora */
@@ -222,7 +216,7 @@
 
         createdCard(newCard , 0);
 
-        if(playerPoints > 21){
+        /*if(playerPoints > 21){
 
             btnGetCard.disabled = true;       
             computerTurn(playerPoints); 
@@ -233,16 +227,17 @@
                     '¡21, Genial!',
                     '¡Espera el turno de la computadora!',
                     'error'
-                    )       
+                    )
+
             computerTurn(playerPoints);
-        }
+        }*/
 
     });
 
     btnFinishGame.addEventListener('click', () => {
         btnGetCard.disabled     = true;
         btnFinishGame.disabled  = true;
-        computerTurn(playersPoints);
+        computerTurn(playersPoints[0]);
     });
 
     btnNewGame.addEventListener('click', () => {
